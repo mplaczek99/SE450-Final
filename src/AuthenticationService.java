@@ -1,16 +1,15 @@
-public class AuthenticationService {
-  private Map<String, User> users = new HashMap<>();
+import java.util.HashMap;
+import java.util.Map;
 
-  public void registerUser(String username, String password) throws NoSuchAlgorithmException {
+public class AuthenticationService {
+  private final Map<String, User> users = new HashMap<>();
+
+  public void registerUser(String username, String password) {
     users.put(username, new User(username, password));
   }
 
-  public boolean authenticate(String username, String password) throws NoSuchAlgorithmException {
+  public User authenticate(String username, String password) {
     User user = users.get(username);
-    if (user == null) {
-      return false;
-    }
-    String hashedPassword = user.hashPassword(password);
-    return user.getHashedPassword().equals(hashedPassword);
+    return (user != null && user.getHashedPassword().equals(PasswordUtil.hashPassword(password))) ? user : null;
   }
 }
