@@ -77,6 +77,6 @@ Cart *-- "1" Item
 Catalog *-- "0..*" Product
 Order *-- "0..*" Item
 User *-- "1" Cart
+AuthenticationService *-- "1..*" User
 
 @enduml
-
