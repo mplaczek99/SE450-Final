@@ -1,63 +1,82 @@
 @startuml
 
-class User {
-    -username: String
-    -hashedPassword: String
-    -cart: Cart
-    +User(username: String, password: String)
-    +getUsername(): String
-    +getHashedPassword(): String
-    +getCart(): Cart
+class Cart {
+  -instance: Cart
+  -items: List<Item>
+  +addItem(product: Product, quantity: int): void
+  +removeItem(product: Product): void
+  +getInstance(): Cart
+  +getTotalPrice(): double
+  +getItems(): List<Item>
+  +clearItems(): void
 }
 
-class AuthenticationService {
-    -users: Map<String, User>
-    +registerUser(username: String, password: String): void
-    +authenticate(username: String, password: String): User
-}
-
-class Product {
-    -name: String
-    -price: double
-    -description: String
-    +Product(name: String, price: double, description: String)
-    +getName(): String
-    +getPrice(): double
-    +getDescription(): String
-}
-
-class ProductCatalog {
-    -products: List<Product>
-    +addProduct(product: Product): void
-    +getProducts(): List<Product>
+class Catalog {
+  -products: List<Product>
+  +addProduct(product: Product): void
+  +getProducts(): List<Product>
 }
 
 class Item {
-    -product: Product
-    -quantity: int
-    +Item(product: Product, quantity: int)
-    +getProduct(): Product
-    +getQuantity(): int
-    +setQuantity(quantity: int): void
+  -product: Product
+  -quantity: int
+  +Item(product: Product, quantity: int)
+  +getProduct(): Product
+  +getQuantity(): int
+  +setQuantity(quantity: int): void
 }
 
-class Cart {
-    -items: List<Item>
-    +addItem(product: Product, quantity: int): void
-    +removeItem(product: Product): void
-    +getTotalPrice(): double
-    +getItems(): List<Item>
+class Order {
+  -items: List<Item>
+  -totalPrice: double
+  +Order(items: List<Item>)
+  +getItems(): List<Item>
+  +getTotalPrice(): double
+}
+
+class OrderService {
+  +placeOrder(cart: Cart): Order
+  +generateOrderSummary(order: Order): String
+}
+
+class Product {
+  -name: String
+  -price: double
+  -description: String
+  +Product(name: String, price: double, description: String)
+  +getName(): String
+  +getPrice(): double
+  +getDescription(): String
+}
+
+class ProductFactory {
+  +createProduct(name: String, price: double, description: String): Product
+}
+
+class User {
+  -username: String
+  -hashedPassword: String
+  -cart: Cart
+  +User(username: String, password: String)
+  +getUsername(): String
+  +getHashedPassword(): String
+  +getCart(): Cart
+}
+
+class AuthenticationService {
+  -users: Map<String, User>
+  +registerUser(username: String, password: String): void
+  +authenticate(username: String, password: String): User
 }
 
 class PasswordUtil {
-    {static} +hashPassword(password: String): String
+  +hashPassword(password: String): String
 }
 
-User --> Cart
-AuthenticationService o-- User : manages >
-ProductCatalog o-- Product : contains >
-Cart o-- Item : contains >
-Item --> Product
+Cart *-- "1" Item
+Catalog *-- "0..*" Product
+Order *-- "0..*" Item
+User *-- "1" Cart
 
 @enduml
 

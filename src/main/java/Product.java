@@ -21,3 +21,9 @@ public class Product {
     return description;
   }
 }
+
+class ProductFactory {
+  public static Product createProduct(String name, double price, String description) {
+    return new Product(name, price, description);
+  }
+}
