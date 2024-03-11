@@ -2,4 +2,4 @@
 Final Project for SE450 at DePaul University.
 
 ![Class Diagram](plantuml.png)
-Generated with PlankUML.
+Generated with PlantUML.
