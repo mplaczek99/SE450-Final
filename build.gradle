@@ -5,21 +5,23 @@
  * To learn more about Gradle by exploring our Samples at https://docs.gradle.org/8.6/samples
  */
 plugins {
-    id 'java'
+  id 'java'
 }
 
 group 'depaul'
 version 'Alpha'
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+  testImplementation 'org.mockito:mockito-core:5.11.0'
+  testImplementation 'org.mockito:mockito-junit-jupiter:5.11.0'
 }
 
 test {
-    useJUnitPlatform()
+  useJUnitPlatform()
 }

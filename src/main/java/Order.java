@@ -24,9 +24,27 @@ public class Order {
 }
 
 class OrderService {
+  private final PaymentService paymentService;
+
+  public OrderService(PaymentService paymentService) {
+    this.paymentService = paymentService;
+  }
+
   public Order placeOrder(final Cart cart) {
-    final List<Item> orderItems = new ArrayList<>(cart.getItems());
-    final Order order = new Order(orderItems);
+    // Check if the cart is not empty
+    if (cart.getItems().isEmpty()) {
+      throw new IllegalStateException("Cannot place an order with an empty cart.");
+    }
+
+    // Process payment
+    double totalPrice = cart.getTotalPrice();
+    if (!paymentService.makePayment(totalPrice)) {
+      throw new IllegalStateException("Payment failed.");
+    }
+
+    // Create and return the order
+    List<Item> orderItems = new ArrayList<>(cart.getItems());
+    Order order = new Order(orderItems);
     cart.clearItems(); // Clear the cart after placing the order
     return order;
   }
