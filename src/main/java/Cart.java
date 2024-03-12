@@ -8,16 +8,18 @@ public class Cart {
   private Cart() {
   } // I am not sure if this is necessary or not
 
-  public void addItem(Product product, int quantity) {
+  public void addItem(final Product product, final int quantity) {
     items.stream()
         .filter(item -> item.getProduct().equals(product))
         .findFirst()
-        .ifPresentOrElse(
-            item -> item.setQuantity(item.getQuantity() + quantity),
-            () -> items.add(new Item(product, quantity)));
+        .ifPresent(item -> item.setQuantity(item.getQuantity() + quantity));
+
+    if (items.stream().noneMatch(item -> item.getProduct().equals(product))) {
+      items.add(new Item(product, quantity));
+    }
   }
 
-  public void removeItem(Product product) {
+  public void removeItem(final Product product) {
     items.removeIf(item -> item.getProduct().equals(product));
   }
 

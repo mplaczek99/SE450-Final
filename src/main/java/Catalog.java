@@ -4,7 +4,7 @@ import java.util.List;
 public class Catalog {
   private final List<Product> products = new ArrayList<>();
 
-  public void addProduct(Product product) {
+  public void addProduct(final Product product) {
     products.add(product);
   }
 

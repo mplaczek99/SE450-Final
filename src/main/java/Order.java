@@ -5,7 +5,7 @@ public class Order {
   private final List<Item> items;
   private final double totalPrice;
 
-  public Order(List<Item> items) {
+  public Order(final List<Item> items) {
     this.items = items;
     this.totalPrice = calculateTotalPrice();
   }
@@ -24,20 +24,21 @@ public class Order {
 }
 
 class OrderService {
-  public Order placeOrder(Cart cart) {
-    List<Item> orderItems = new ArrayList<>(cart.getItems());
-    Order order = new Order(orderItems);
+  public Order placeOrder(final Cart cart) {
+    final List<Item> orderItems = new ArrayList<>(cart.getItems());
+    final Order order = new Order(orderItems);
     cart.clearItems(); // Clear the cart after placing the order
     return order;
   }
 
-  public String generateOrderSummary(Order order) {
-    StringBuilder summary = new StringBuilder();
-    summary.append("Order Summary:\n");
+  public String generateOrderSummary(final Order order) {
+    StringBuilder summary = new StringBuilder("Order Summary:\n");
     for (Item item : order.getItems()) {
-      summary.append(item.getProduct().getName()).append(" x ").append(item.getQuantity()).append("\n");
+      summary.append(item.getProduct().getName())
+          .append(" x ")
+          .append(item.getQuantity())
+          .append("\n");
     }
-    summary.append("Total Price: ").append(order.getTotalPrice());
-    return summary.toString();
+    return summary.append("Total Price: ").append(order.getTotalPrice()).toString();
   }
 }

@@ -2,7 +2,7 @@ public class Item {
   private final Product product;
   private int quantity;
 
-  public Item(Product product, int quantity) {
+  public Item(final Product product, final int quantity) {
     this.product = product;
     this.quantity = quantity;
   }
@@ -15,7 +15,7 @@ public class Item {
     return quantity;
   }
 
-  public void setQuantity(int quantity) {
+  public void setQuantity(final int quantity) {
     this.quantity = quantity;
   }
 }
