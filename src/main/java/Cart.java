@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-  private static Cart instance;
   private final List<Item> items = new ArrayList<>();
 
   private Cart() {
@@ -25,10 +24,7 @@ public class Cart {
 
   // Will create a new instance of the Cart
   public static Cart getInstance() {
-    if (instance == null) {
-      instance = new Cart();
-    }
-    return instance;
+    return CartHolder.INSTANCE;
   }
 
   public double getTotalPrice() {
@@ -43,5 +39,34 @@ public class Cart {
 
   public void clearItems() {
     items.clear();
+  }
+
+  /**
+   * Something, something thread-safety, I don't understand why entirely
+   */
+  private static class CartHolder {
+    private static final Cart INSTANCE = new Cart();
+  }
+}
+
+class CartBuilder {
+  private Cart cart;
+
+  public CartBuilder() {
+    this.cart = Cart.getInstance();
+  }
+
+  public CartBuilder addItem(final Product product, final int quantity) {
+    cart.addItem(product, quantity);
+    return this;
+  }
+
+  public CartBuilder removeItem(final Product product) {
+    cart.removeItem(product);
+    return this;
+  }
+
+  public Cart build() {
+    return cart;
   }
 }
