@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Cart {
   private final List<Item> items = new ArrayList<>();
+  private final Logger LOGGER = Logger.getLogger(Cart.class.getName());
 
   private Cart() {
   }
@@ -12,12 +14,23 @@ public class Cart {
         .filter(item -> item.getProduct().equals(product))
         .findFirst()
         .ifPresentOrElse(
-            item -> item.setQuantity(item.getQuantity() + quantity),
-            () -> items.add(new Item(product, quantity)));
+            item -> {
+              item.setQuantity(item.getQuantity() + quantity);
+              LOGGER.info("Updated quantity of " + product.getName() + " to " + item.getQuantity());
+            },
+            () -> {
+              items.add(new Item(product, quantity));
+              LOGGER.info("Added " + product.getName() + " with quantity " + quantity);
+            });
   }
 
   public void removeItem(final Product product) {
-    items.removeIf(item -> item.getProduct().equals(product));
+    boolean removed = items.removeIf(item -> item.getProduct().equals(product));
+    if (removed) {
+      LOGGER.info("Removed " + product.getName() + " from the cart");
+    } else {
+      LOGGER.warning("Attempted to remove " + product.getName() + " which is not in the cart");
+    }
   }
 
   public static Cart getInstance() {
