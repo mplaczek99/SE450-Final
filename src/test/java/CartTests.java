@@ -51,4 +51,27 @@ public class CartTests {
     cart.clearItems();
     assertTrue(cart.getItems().isEmpty(), "Cart should be empty after clearing items.");
   }
+
+  @Test
+  void testAddMultipleItems() {
+    cart.addItem(product1, 2);
+    cart.addItem(product2, 3);
+    assertEquals(2, cart.getItems().size(), "Cart should contain 2 items.");
+    assertEquals(80.0, cart.getTotalPrice(), "Total price should be 80.0.");
+  }
+
+  @Test
+  void testRemoveNonExistentItem() {
+    cart.addItem(product1, 1);
+    cart.removeItem(product2);
+    assertEquals(1, cart.getItems().size(), "Cart should still contain 1 item.");
+  }
+
+  @Test
+  void testUpdateItemQuantity() {
+    cart.addItem(product1, 1);
+    cart.addItem(product1, 2);
+    assertEquals(1, cart.getItems().size(), "Cart should contain 1 item.");
+    assertEquals(3, cart.getItems().get(0).getQuantity(), "Quantity of Product 1 should be updated to 3.");
+  }
 }

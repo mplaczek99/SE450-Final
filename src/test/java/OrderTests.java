@@ -66,4 +66,18 @@ public class OrderTests {
     assertEquals(product1, order.getItems().get(0).getProduct(), "First item should be Product 1.");
     assertEquals(2, order.getItems().get(0).getQuantity(), "Quantity of Product 1 should be 2.");
   }
+
+  @Test
+  void testPlaceOrderWithEmptyCart() {
+    Cart emptyCart = new CartBuilder().build();
+    assertThrows(IllegalStateException.class, () -> orderService.placeOrder(emptyCart),
+        "Placing an order with an empty cart should throw an exception.");
+  }
+
+  @Test
+  void testPlaceOrderWithFailedPayment() {
+    when(mockPaymentService.makePayment(anyDouble())).thenReturn(false);
+    assertThrows(IllegalStateException.class, () -> orderService.placeOrder(cart),
+        "Placing an order with failed payment should throw an exception.");
+  }
 }

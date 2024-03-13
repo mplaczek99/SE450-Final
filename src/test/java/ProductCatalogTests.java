@@ -27,4 +27,16 @@ public class ProductCatalogTests {
   void testGetProducts() {
     assertEquals(2, catalog.getProducts().size(), "Catalog should contain 2 products.");
   }
+
+  @Test
+  void testRemoveProduct() {
+    catalog.removeProduct(product1);
+    assertEquals(1, catalog.getProducts().size(), "Catalog should contain 1 product after removal.");
+  }
+
+  @Test
+  void testAddDuplicateProduct() {
+    catalog.addProduct(product1);
+    assertEquals(2, catalog.getProducts().size(), "Catalog should still contain 2 products.");
+  }
 }
