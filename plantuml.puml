@@ -1,11 +1,13 @@
 @startuml
 
 class Cart {
-  -instance: Cart
+  {static} - instance: Cart
   -items: List<Item>
+  -LOGGER: Logger
+  -Cart()
   +addItem(product: Product, quantity: int): void
   +removeItem(product: Product): void
-  +getInstance(): Cart
+  {static} +getInstance(): Cart
   +getTotalPrice(): double
   +getItems(): List<Item>
   +clearItems(): void
@@ -14,6 +16,7 @@ class Cart {
 class Catalog {
   -products: List<Product>
   +addProduct(product: Product): void
+  +removeProduct(product: Product): void
   +getProducts(): List<Product>
 }
 
@@ -24,19 +27,38 @@ class Item {
   +getProduct(): Product
   +getQuantity(): int
   +setQuantity(quantity: int): void
+  +equals(o: Object): boolean
+  +hashCode(): int
 }
 
 class Order {
   -items: List<Item>
   -totalPrice: double
   +Order(items: List<Item>)
+  +calculateTotalPrice(): double
   +getItems(): List<Item>
   +getTotalPrice(): double
 }
 
 class OrderService {
+  -paymentService: PaymentService
+  +OrderService(paymentService: PaymentService)
   +placeOrder(cart: Cart): Order
   +generateOrderSummary(order: Order): String
+}
+
+class PaymentService {
+  -paymentGateway: PaymentGateway
+  +PaymentService(paymentGateway: PaymentGateway)
+  +makePayment(amount: double): boolean
+}
+
+class MockPaymentGateway {
+  +processPayment(amount: double): boolean
+}
+
+interface PaymentGateway {
+  processPayment(amount: double): boolean
 }
 
 class Product {

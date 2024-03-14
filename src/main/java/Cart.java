@@ -3,10 +3,13 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class Cart {
-  private final List<Item> items = new ArrayList<>();
-  private final Logger LOGGER = Logger.getLogger(Cart.class.getName());
+  private static Cart instance;
+  private final List<Item> items;
+  private final Logger LOGGER;
 
   private Cart() {
+    items = new ArrayList<>();
+    LOGGER = Logger.getLogger(Cart.class.getName());
   }
 
   public void addItem(final Product product, final int quantity) {
@@ -33,8 +36,11 @@ public class Cart {
     }
   }
 
-  public static Cart getInstance() {
-    return CartHolder.INSTANCE;
+  public static synchronized Cart getInstance() { // synchronized for thread-safety
+    if (instance == null) {
+      instance = new Cart();
+    }
+    return instance;
   }
 
   public double getTotalPrice() {
@@ -49,10 +55,6 @@ public class Cart {
 
   public void clearItems() {
     items.clear();
-  }
-
-  private static class CartHolder {
-    private static final Cart INSTANCE = new Cart();
   }
 }
 

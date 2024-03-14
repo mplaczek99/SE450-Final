@@ -11,7 +11,9 @@ public class Catalog {
   }
 
   public void removeProduct(final Product product) {
-    products.remove(product);
+    if (products.contains(product)) {
+      products.remove(product);
+    }
   }
 
   public List<Product> getProducts() {

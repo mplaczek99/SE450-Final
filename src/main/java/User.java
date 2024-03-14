@@ -6,11 +6,12 @@ import java.util.Map;
 public class User {
   private final String username;
   private final String hashedPassword;
-  private final Cart cart = Cart.getInstance();
+  private final Cart cart;
 
   public User(final String username, final String password) {
     this.username = username;
     this.hashedPassword = PasswordUtil.hashPassword(password);
+    cart = Cart.getInstance();
   }
 
   public String getUsername() {
