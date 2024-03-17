@@ -21,6 +21,7 @@ To compile the application, navigate to the project's root directory and run:
 
 ```bash
 gradle build
+```
 
 This command compiles the Java source files and packages the application.
 
@@ -30,6 +31,7 @@ To execute the application, use the following command:
 
 ```bash
 gradle run
+```
 
 This command will launch the GUI of the shopping cart application.
 
@@ -39,5 +41,6 @@ To run the unit tests, execute:
 
 ```bash
 gradle test
+```
 
 This command will run the Unit Tests for this project.
