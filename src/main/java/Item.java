@@ -9,14 +9,29 @@ public class Item {
     this.quantity = quantity;
   }
 
+  /**
+   * Returns the product
+   *
+   * @return The product
+   */
   public Product getProduct() {
     return product;
   }
 
+  /**
+   * Returns the quantity
+   *
+   * @return The quantity
+   */
   public int getQuantity() {
     return quantity;
   }
 
+  /**
+   * Sets the quantity
+   *
+   * @param quantity The quantity
+   */
   public void setQuantity(final int quantity) {
     this.quantity = quantity;
   }
