@@ -15,7 +15,7 @@ public class Cart {
   /**
    * Adds an item to the cart, and updates the quantity if it exists
    *
-   * @param product Product to add
+   * @param product  Product to add
    * @param quantity Quantity to add
    */
   public void addItem(final Product product, final int quantity) {
@@ -98,7 +98,7 @@ class CartBuilder {
   /**
    * Adds an item to the cart
    *
-   * @param product Product to add
+   * @param product  Product to add
    * @param quantity Quantity to add
    * @return The CartBuilder
    */

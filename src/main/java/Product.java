@@ -38,6 +38,14 @@ public class Product {
 }
 
 class ProductFactory {
+  /**
+   * Creates a new product
+   *
+   * @param name        The name
+   * @param price       The price
+   * @param description The description
+   * @return The product
+   */
   public static Product createProduct(final String name, final double price, final String description) {
     return new Product(name, price, description);
   }
