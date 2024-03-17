@@ -36,8 +36,14 @@ public class Item {
     this.quantity = quantity;
   }
 
+  /**
+   * Returns true if the items are equal
+   *
+   * @param o The object to compare
+   * @return true if the items are equal
+   */
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(Object o) { // I probably could've used a different parameter...
     if (this == o)
       return true;
     if (o == null || getClass() != o.getClass())
@@ -47,6 +53,11 @@ public class Item {
         Objects.equals(product, item.product);
   }
 
+  /**
+   * Returns the hash code
+   *
+   * @return The hash code
+   */
   @Override
   public int hashCode() {
     return Objects.hash(product, quantity);
