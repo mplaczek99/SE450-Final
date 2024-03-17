@@ -5,6 +5,12 @@ class PaymentService {
     this.paymentGateway = paymentGateway;
   }
 
+  /**
+   * Makes a payment
+   * 
+   * @param amount Amount to be paid
+   * @return true if payment was processed
+   */
   public boolean makePayment(double amount) {
     return paymentGateway.processPayment(amount);
   }
@@ -20,7 +26,6 @@ class MockPaymentGateway implements PaymentGateway {
   @Override
   public boolean processPayment(double amount) {
     System.out.println("Processing payment of $" + amount);
-    // Simulate payment processing
     return true;
   }
 }

@@ -14,14 +14,29 @@ public class User {
     cart = Cart.getInstance();
   }
 
+  /**
+   * Returns the User's username
+   *
+   * @return The username
+   */
   public String getUsername() {
     return username;
   }
 
+  /**
+   * Returns the User's hashed password
+   *
+   * @return The hashed password
+   */
   public String getHashedPassword() {
     return hashedPassword;
   }
 
+  /**
+   * Returns the User's cart
+   *
+   * @return The cart
+   */
   public Cart getCart() {
     return cart;
   }
@@ -30,10 +45,16 @@ public class User {
 class AuthenticationService {
   private final Map<String, User> users = new HashMap<>();
 
+  /**
+   * Registers a new user
+   */
   public void registerUser(final String username, final String password) {
     users.put(username, new User(username, password));
   }
 
+  /**
+   * Authenticates a user
+   */
   public User authenticate(final String username, final String password) {
     final User user = users.get(username);
     return (user != null && user.getHashedPassword().equals(PasswordUtil.hashPassword(password))) ? user : null;
@@ -41,6 +62,12 @@ class AuthenticationService {
 }
 
 class PasswordUtil {
+  /**
+   * Hashes a password using SHA256
+   *
+   * @param password The plaintext password
+   * @return The hashed password
+   */
   public static String hashPassword(final String password) {
     try {
       final MessageDigest digest = MessageDigest.getInstance("SHA-256");

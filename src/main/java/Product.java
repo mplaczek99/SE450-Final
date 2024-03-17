@@ -9,14 +9,29 @@ public class Product {
     this.description = description;
   }
 
+  /**
+   * Returns the name of the product
+   *
+   * @return The name
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Returns the price of the product
+   *
+   * @return The price
+   */
   public double getPrice() {
     return price;
   }
 
+  /**
+   * Returns the description of the product
+   *
+   * @return The description
+   */
   public String getDescription() {
     return description;
   }
