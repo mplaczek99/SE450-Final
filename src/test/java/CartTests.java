@@ -10,8 +10,8 @@ public class CartTests {
   @BeforeEach
   void setUp() {
     cart = new CartBuilder().build();
-    product1 = new Product("Product 1", 10.0, "Description 1");
-    product2 = new Product("Product 2", 20.0, "Description 2");
+    product1 = new Product("Product 1", 10.0, "Description 1", 10);
+    product2 = new Product("Product 2", 20.0, "Description 2", 10);
   }
 
   @Test

@@ -12,8 +12,8 @@ public class UserTests {
     authService = new AuthenticationService();
     user1 = new User("user1", "password1");
     user2 = new User("user2", "password2");
-    product1 = new Product("Product 1", 10.0, "Description 1");
-    product2 = new Product("Product 2", 20.0, "Description 2");
+    product1 = new Product("Product 1", 10.0, "Description 1", 10);
+    product2 = new Product("Product 2", 20.0, "Description 2", 10);
 
     authService.registerUser(user1.getUsername(), "password1");
     authService.registerUser(user2.getUsername(), "password2");

@@ -2,7 +2,7 @@
 Final Project for SE450 at DePaul University.
 
 ![Class Diagram](plantuml.png)
-Generated with PlantUML.
+Generated with PlantUML
 
 ## Overview
 
@@ -44,3 +44,7 @@ gradle test
 ```
 
 This command will run the Unit Tests for this project.
+
+## Using the Application
+ - default username: user
+ - default password: password

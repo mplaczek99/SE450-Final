@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Catalog {
   private final List<Product> products = new ArrayList<>();
@@ -33,5 +34,11 @@ public class Catalog {
    */
   public List<Product> getProducts() {
     return new ArrayList<>(products);
+  }
+
+  public List<Product> searchProducts(String query) {
+    return products.stream()
+        .filter(product -> product.getName().toLowerCase().contains(query.toLowerCase()))
+        .collect(Collectors.toList());
   }
 }
