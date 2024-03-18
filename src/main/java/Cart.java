@@ -1,3 +1,8 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -79,12 +84,60 @@ public class Cart {
     return new ArrayList<>(items);
   }
 
+  public void setItems(List<Item> items) {
+    this.items.clear();
+    this.items.addAll(items);
+  }
+
   /**
    * Removes all items from the cart
    */
   public void clearItems() {
     items.clear();
   }
+
+  /**
+   * Saves the cart to a file
+   */
+  /*
+   * public void saveCart() {
+   * try (FileOutputStream fos = new FileOutputStream("cart.ser");
+   * ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+   * oos.writeObject(items);
+   * LOGGER.info("Cart saved successfully!");
+   * } catch (IOException e) {
+   * LOGGER.warning("Failed to save cart: " + e.getMessage());
+   * }
+   * }
+   */
+  /**
+   * Loads the cart from a file
+   */
+  /*
+   * public void loadCart() {
+   * try (FileInputStream fis = new FileInputStream("cart.ser");
+   * ObjectInputStream ois = new ObjectInputStream(fis)) {
+   * Object loadedObject = ois.readObject();
+   * if (loadedObject instanceof List) {
+   * List<?> loadedItems = (List<?>) loadedObject;
+   * items.clear();
+   * for (Object obj : loadedItems) {
+   * if (obj instanceof Item) {
+   * items.add((Item) obj);
+   * } else {
+   * LOGGER.warning("Failed to load cart: Invalid format in file");
+   * return;
+   * }
+   * }
+   * LOGGER.info("Cart loaded successfully!");
+   * } else {
+   * LOGGER.warning("Failed to load cart: Invalid format in file");
+   * }
+   * } catch (IOException | ClassNotFoundException e) {
+   * LOGGER.warning("Failed to load cart: " + e.getMessage());
+   * }
+   * }
+   */
 }
 
 class CartBuilder {

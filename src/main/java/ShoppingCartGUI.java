@@ -39,7 +39,7 @@ public class ShoppingCartGUI extends JFrame {
     catalog.addProduct(new Product("Banana", 0.59, "Fresh Banana", 150));
     catalog.addProduct(new Product("Orange", 0.79, "Fresh Orange", 120));
   }
-  
+
   /**
    * Initializes the user default credentials
    */
@@ -103,7 +103,7 @@ public class ShoppingCartGUI extends JFrame {
   /**
    * Adds an item to the cart
    *
-   * @param product  Product to add
+   * @param product Product to add
    */
   private void addToCart() {
     Product selectedProduct = (Product) productComboBox.getSelectedItem();
@@ -174,7 +174,7 @@ public class ShoppingCartGUI extends JFrame {
   /**
    * Creates the button panel
    *
-   * @return The ButtonPanel 
+   * @return The ButtonPanel
    */
   private JPanel createButtonPanel() {
     JPanel buttonPanel = new JPanel();
@@ -186,14 +186,6 @@ public class ShoppingCartGUI extends JFrame {
     JButton clearButton = new JButton("Clear Cart");
     clearButton.addActionListener(e -> clearCart());
     buttonPanel.add(clearButton);
-
-    JButton saveButton = new JButton("Save Cart");
-    saveButton.addActionListener(e -> saveCart());
-    buttonPanel.add(saveButton);
-
-    JButton loadButton = new JButton("Load Cart");
-    loadButton.addActionListener(e -> loadCart());
-    buttonPanel.add(loadButton);
 
     JButton historyButton = new JButton("Order History");
     historyButton.addActionListener(e -> showOrderHistory());
@@ -286,43 +278,6 @@ public class ShoppingCartGUI extends JFrame {
       }
     } else {
       System.exit(0);
-    }
-  }
-
-  /**
-   * Saves the cart
-   */
-  private void saveCart() {
-    try (FileOutputStream fos = new FileOutputStream("cart.ser");
-        ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-      oos.writeObject(new ArrayList<>(cart.getItems()));
-      JOptionPane.showMessageDialog(this, "Cart saved successfully!");
-    } catch (IOException e) {
-      JOptionPane.showMessageDialog(this, "Failed to save cart: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
-  }
-
-  /**
-   * Loads the cart
-   */
-  private void loadCart() {
-    try (FileInputStream fis = new FileInputStream("cart.ser");
-        ObjectInputStream ois = new ObjectInputStream(fis)) {
-      List<Item> items = (List<Item>) ois.readObject();
-      cart.clearItems();
-      for (Item item : items) {
-        if (item.getProduct().getInventory() >= item.getQuantity()) {
-          cart.addItem(item.getProduct(), item.getQuantity());
-          item.getProduct().setInventory(item.getProduct().getInventory() - item.getQuantity());
-        } else {
-          JOptionPane.showMessageDialog(this, "Insufficient inventory for " + item.getProduct().getName(), "Error",
-              JOptionPane.ERROR_MESSAGE);
-        }
-      }
-      updateCartDisplay();
-      JOptionPane.showMessageDialog(this, "Cart loaded successfully!");
-    } catch (IOException | ClassNotFoundException e) {
-      JOptionPane.showMessageDialog(this, "Failed to load cart: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
   }
 

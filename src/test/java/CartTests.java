@@ -2,6 +2,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
+
 public class CartTests {
   private Cart cart;
   private Product product1;
@@ -74,4 +83,53 @@ public class CartTests {
     assertEquals(1, cart.getItems().size(), "Cart should contain 1 item.");
     assertEquals(3, cart.getItems().get(0).getQuantity(), "Quantity of Product 1 should be updated to 3.");
   }
+
+  /*
+   * @Test
+   * void testSaveCart() {
+   * List<Item> items = new ArrayList<>();
+   * items.add(new Item(product1, 2));
+   * items.add(new Item(product2, 3));
+   * cart.setItems(items);
+   * 
+   * ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+   * System.setOut(new PrintStream(outputStream));
+   * 
+   * cart.saveCart();
+   * 
+   * String output = outputStream.toString();
+   * assertTrue(output.contains("Cart saved successfully!"),
+   * "Cart should be saved successfully.");
+   * }
+   * 
+   * @Test
+   * void testLoadCart() {
+   * List<Item> items = new ArrayList<>();
+   * items.add(new Item(product1, 2));
+   * items.add(new Item(product2, 3));
+   * 
+   * try {
+   * // Save items to a file
+   * File file = new File("cart.ser");
+   * FileOutputStream fos = new FileOutputStream(file);
+   * ObjectOutputStream oos = new ObjectOutputStream(fos);
+   * oos.writeObject(items);
+   * oos.close();
+   * fos.close();
+   * 
+   * // Load items back into cart
+   * Cart loadedCart = Cart.getInstance();
+   * loadedCart.loadCart();
+   * 
+   * assertEquals(2, loadedCart.getItems().size(),
+   * "Cart should contain 2 items after loading.");
+   * assertTrue(loadedCart.getItems().contains(new Item(product1, 2)),
+   * "Cart should contain Product 1.");
+   * assertTrue(loadedCart.getItems().contains(new Item(product2, 3)),
+   * "Cart should contain Product 2.");
+   * } catch (IOException e) {
+   * e.printStackTrace();
+   * }
+   * }
+   */
 }
